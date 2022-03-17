@@ -27,7 +27,7 @@ tab1 <- function(dat, ..., max_cat=30) {
     purrr::map(function(x)
       if(length(unique(x))<max_cat) {
         janitor::tabyl(x) %>% janitor::adorn_totals("row") %>%
-          dplyr::mutate_at(dplyr::vars(3:length(.)), dplyr::funs(paste0(format(round(.*100,2), nsmall = 2), "%")))
+          dplyr::mutate_at(dplyr::vars(3:length(.)), list(~paste0(format(round(.*100,2), nsmall = 2), "%")))
       }
       else {
         paste0("Variable has more than ", max_cat, " categories. Change `max_cat` to tab variable")
@@ -38,7 +38,7 @@ tab1 <- function(dat, ..., max_cat=30) {
     purrr::map(function(x)
       if(length(unique(x))<max_cat) {
         janitor::tabyl(x) %>% janitor::adorn_totals("row") %>%
-          dplyr::mutate_at(dplyr::vars(3:length(.)), dplyr::funs(paste0(format(round(.*100,2), nsmall = 2), "%")))
+          dplyr::mutate_at(dplyr::vars(3:length(.)), list(~paste0(format(round(.*100,2), nsmall = 2), "%")))
       }
       else {
         paste0("Variable has more than ", max_cat, " categories. Change `max_cat` to tab variable")
